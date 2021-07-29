@@ -38,10 +38,12 @@ async def roll(message):
     sides = int(match.group(2))
     explosion = True if (match.group(3) and sides >= 2) else False
 
-    keep = match.group(4)
-    keep = keep + '1' if len(keep) == 2 else keep
-    keep_multiplier = 1 if keep[:2] == 'kh' else -1 if keep[:2] == 'kl' else ''
-    keep_amount = int(keep[2])*keep_multiplier
+    keep = match.group(4) if match.group(4) else False
+
+    if keep:
+        keep = keep + '1' if len(keep) == 2 else keep
+        keep_multiplier = 1 if keep[:2] == 'kh' else -1 if keep[:2] == 'kl' else ''
+        keep_amount = int(keep[2])*keep_multiplier
 
     modifier = int(match.group(5)) if match.group(5) else 0
 
@@ -84,7 +86,7 @@ async def roll(message):
     all_rolls_text = f'-----------------------\n**All Rolls:** {total_roll_list}\n' if roll_list != total_roll_list else ''
 
 
-    if keep_amount:
+    if keep:
         total_roll_list = n_max_min_numbers(total_roll_list, keep_amount)
         keep_rolls_text = f'-----------------------\n**Kept Rolls:** {total_roll_list}\n'
     else:
