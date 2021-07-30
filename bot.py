@@ -28,7 +28,7 @@ async def roll(message):
 
     roll = content.lstrip('+roll ')
 
-    match = re.match(r'(\d*)d(\d+)(e)?(k[hl]\d*)?([+-]\d+)?', roll)
+    match = re.match(r'(\d*)d(\d+)([e!])?(k[hl]\d*)?([+-]\d+)?', roll)
 
     if not match:
         print(f'No match found on input "{roll}".')
